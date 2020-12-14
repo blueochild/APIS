@@ -13,6 +13,7 @@ public class UserRoute {
     @Autowired
     public UserRoute(UserService userService) {
         this.userService = userService;
+        
     }
 
     @GetMapping("")

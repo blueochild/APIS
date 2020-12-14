@@ -18,6 +18,9 @@ public class UserService {
         for( User user : this.userRepository.findAll()){
             System.out.println(user);
         }
+
+//        User user = this.userRepository.findByName("");
+//        System.out.println(user.getName());
     }
 
     public void initializeUsers(){
