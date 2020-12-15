@@ -3,6 +3,7 @@ package com.blueochild.service;
 import com.blueochild.model.Product;
 import com.blueochild.model.User;
 import com.blueochild.repository.ProductRepository;
+import com.blueochild.vo.ProductInsertVO;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
@@ -52,6 +53,17 @@ public class ProductService {
         this.productRepository.save(Product2);
         this.productRepository.save(Product3);
         this.productRepository.flush();
+    }
+
+    public void productInsert(ProductInsertVO productInsertVO){
+        Product productInsert = Product.builder()
+                .name(productInsertVO.getName())
+                .description(productInsertVO.getDescription())
+                .ListPrice(productInsertVO.getListPrice())
+                .price(productInsertVO.getPrice())
+                .build();
+
+        this.productRepository.save(productInsert);
     }
 
     public void deleteProduct(int productId){
