@@ -70,4 +70,9 @@ public class UserService {
         this.userRepository.save(createuser);
         this.userRepository.flush();
     }
+
+    public void deleteUser(int userId){
+        System.out.println(userId);
+        this.userRepository.deleteById(userId);
+    }
 }
