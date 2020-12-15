@@ -1,5 +1,7 @@
 package com.blueochild.route;
 
+import java.util.List;
+import com.blueochild.model.User;
 import com.blueochild.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,12 +15,18 @@ public class UserRoute {
     @Autowired
     public UserRoute(UserService userService) {
         this.userService = userService;
-        
     }
 
     @GetMapping("")
-    public void getUsers(){
-        this.userService.findAll();
+    @ResponseBody
+    public List<User> getUsers(){
+        return this.userService.findAll();
+    }
+
+    @GetMapping("/{userId}")
+    @ResponseBody
+    public User getUser(@PathVariable(value="userId") String userId) throws Exception{
+        return this.userService.find(Integer.parseInt(userId));
     }
 
     @GetMapping("/initialize")
