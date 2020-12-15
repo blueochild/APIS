@@ -1,8 +1,12 @@
 package com.blueochild.service;
 
 import com.blueochild.model.Product;
+import com.blueochild.model.User;
 import com.blueochild.repository.ProductRepository;
 import org.springframework.stereotype.Controller;
+
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ProductService {
@@ -11,6 +15,15 @@ public class ProductService {
 
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
+    }
+
+    public Product find(int ProductId) throws Exception{
+        Optional<Product> searchedProduct = this.productRepository.findById(ProductId);
+        return searchedProduct.orElseThrow(() -> new Exception("해당 상품을 찾지 못했습니다."));
+    }
+
+    public List<Product> findAll() {
+        return this.productRepository.findAll();
     }
 
     public void initializeProduct(){
