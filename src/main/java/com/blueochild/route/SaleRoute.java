@@ -36,4 +36,9 @@ public class SaleRoute {
     public Sale GetSale(@PathVariable(value="saleId") String saleId) throws Exception{
         return this.saleService.find(Integer.parseInt(saleId));
     }
+
+    @DeleteMapping("/{saleId}")
+    public void deleteSale(@PathVariable(value = "saleId") String saleId){
+        this.saleService.deleteSale(Integer.parseInt(saleId));
+    }
 }

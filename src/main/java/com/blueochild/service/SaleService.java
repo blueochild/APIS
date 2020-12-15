@@ -62,4 +62,8 @@ public class SaleService {
         this.saleRepository.save(user3);
         this.saleRepository.flush();
     }
+
+    public void deleteSale(int saleId){
+        this.saleRepository.deleteById(saleId);
+    }
 }
