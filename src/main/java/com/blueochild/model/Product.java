@@ -27,10 +27,10 @@ public class Product {
     private int price;
 
     @Builder
-    public Product(String name, String description, int listprice, int price){
+    public Product(String name, String description, int ListPrice, int price){
         this.name = name;
         this.description = description;
-        this.ListPrice = listprice;
+        this.ListPrice = ListPrice;
         this.price = price;
     }
 
