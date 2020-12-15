@@ -3,6 +3,7 @@ package com.blueochild.route;
 import java.util.List;
 import com.blueochild.model.User;
 import com.blueochild.service.UserService;
+import com.blueochild.vo.UserRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,9 +30,16 @@ public class UserRoute {
         return this.userService.find(Integer.parseInt(userId));
     }
 
-    @GetMapping("/initialize")
+    @GetMapping("/initializeUser")
     public void initializeUsers() {
         this.userService.initializeUsers();
     }
+
+    @PostMapping("/register")
+    public void createUser(UserRegisterVO user){
+        this.userService.createUser(user);
+        System.out.println(user);
+    }
+
 
 }

@@ -1,8 +1,12 @@
 package com.blueochild.service;
 
 import java.util.List;
+
 import com.blueochild.model.User;
+import com.blueochild.repository.ProductRepository;
+import com.blueochild.repository.SaleRepository;
 import com.blueochild.repository.UserRepository;
+import com.blueochild.vo.UserRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -13,17 +17,18 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository){
+    public UserService(UserRepository userRepository, SaleRepository saleRepository, ProductRepository productRepository){
         this.userRepository = userRepository;
     }
 
     public User find(int userId) throws Exception{
         Optional<User> searchedUser = this.userRepository.findById(userId);
-        if(searchedUser == null){
-            throw new Exception("해당 유저를 찾지 못했습니다.");
-        }
-        return searchedUser.get();
-//        return searchedUser.orElseThrow() -> new Exception("해당 유저를 찾지 못했습니다.");
+        return searchedUser.orElseThrow(()->new Exception("해당 유저를 찾지 못했습니다."));
+
+//        if(searchedUser == null){
+//            throw new Exception("해당 유저를 찾지 못했습니다.");
+//        }
+//        return searchedUser.get();
     }
 
     public List<User> findAll() {
@@ -52,6 +57,17 @@ public class UserService {
         this.userRepository.save(user1);
         this.userRepository.save(user2);
         this.userRepository.save(user3);
+        this.userRepository.flush();
+    }
+
+    public void createUser(UserRegisterVO userRegisterVO){
+        User createuser = User.builder()
+                .email(userRegisterVO.getEmail())
+                .name(userRegisterVO.getName())
+                .phone(userRegisterVO.getPhone())
+                .build();
+
+        this.userRepository.save(createuser);
         this.userRepository.flush();
     }
 }
