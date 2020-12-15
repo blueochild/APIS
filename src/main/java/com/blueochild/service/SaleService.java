@@ -1,9 +1,14 @@
 package com.blueochild.service;
 
+import com.blueochild.model.Product;
 import com.blueochild.model.Sale;
+import com.blueochild.model.User;
 import com.blueochild.repository.SaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class SaleService {
@@ -12,6 +17,19 @@ public class SaleService {
     @Autowired
     public SaleService(SaleRepository saleRepository) {
         this.saleRepository = saleRepository;
+    }
+
+    public Sale find(int SaleId) throws Exception{
+        Optional<Sale> searchedSale = this.saleRepository.findById(SaleId);
+        return searchedSale.orElseThrow(() -> new Exception("해당 상품을 찾지 못했습니다."));
+//        if(searchedSale == null){
+//            throw new Exception("해당 상품을 찾지 못했습니다.");
+//        }
+//        return searchedSale.get();
+    }
+
+    public List<Sale> findAll() {
+        return this.saleRepository.findAll();
     }
 
     public void initializeSale(){
