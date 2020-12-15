@@ -72,7 +72,6 @@ public class UserService {
     }
 
     public void deleteUser(int userId){
-        System.out.println(userId);
         this.userRepository.deleteById(userId);
     }
 }
