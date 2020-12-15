@@ -53,4 +53,8 @@ public class ProductService {
         this.productRepository.save(Product3);
         this.productRepository.flush();
     }
+
+    public void deleteProduct(int productId){
+        this.productRepository.deleteById(productId);
+    }
 }
