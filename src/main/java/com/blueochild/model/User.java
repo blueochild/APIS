@@ -1,6 +1,7 @@
 package com.blueochild.model;
 
 import lombok.Builder;
+import lombok.Generated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,16 +25,16 @@ public class User {
     private String phone;
 
     @Builder
-    public User(String email, String name, String phone){
+    public User(String email, String name, String phone) {
         this.email = email;
         this.name = name;
         this.phone = phone;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return String.format(
-                "User[userId=%d, email ='%s', name='%s', phone='%s']",
+                "User[user_id=%d, email='%s', name='%s', phone='%s",
                 this.userId, this.email, this.name, this.phone
         );
     }

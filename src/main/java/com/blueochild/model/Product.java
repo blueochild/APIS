@@ -21,24 +21,32 @@ public class Product {
     private String description;
 
     @Column
-    private int ListPrice;
+    private int listPrice;
 
     @Column
     private int price;
 
+    @Column(length = 40)
+    private String category;
+
+    @Column
+    private String imageUrl;
+
     @Builder
-    public Product(String name, String description, int ListPrice, int price){
+    public Product(String name, String description, int listPrice, int price, String category, String imageUrl) {
         this.name = name;
         this.description = description;
-        this.ListPrice = ListPrice;
+        this.listPrice = listPrice;
         this.price = price;
+        this.category = category;
+        this.imageUrl = imageUrl;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return String.format(
-                "Product[productId='%s', name='%s', description='%s', listPrice=%d, pridce=%d]",
-                this.productId, this.name,this.description, this.ListPrice, this.price
+                "Product[productId=%d, name='%s', description='%s', listPrice=%d, price=%d, category='%s', image='%s']",
+                this.productId, this.name, this.description, this.listPrice, this.price, this.category, this.imageUrl
         );
     }
 }
