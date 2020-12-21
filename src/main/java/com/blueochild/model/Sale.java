@@ -1,12 +1,13 @@
 package com.blueochild.model;
 
-import com.blueochild.datamodel.*;
+import com.choijh.datamodel.SaleStatusEnum;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+
 
 @Getter
 @NoArgsConstructor
@@ -47,8 +48,8 @@ public class Sale {
     @Override
     public String toString() {
         return String.format(
-                "Sale[saleId=%d, userId=%d, productId=%d, paidPrice=%d, listPrice=%d, amount=%d]",
-                this.saleId, this.userId, this.productId, this.paidPrice, this.listPrice, this.amount
+                "Sale[saleId=%d, userId=%d, productId=%d, paidPrice=%d, listPrice=%d, amount=%d, status='%s']",
+                this.saleId, this.userId, this.productId, this.paidPrice, this.listPrice, this.amount, this.status
         );
     }
 }

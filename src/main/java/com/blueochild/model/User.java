@@ -37,4 +37,5 @@ public class User {
                 this.userId, this.email, this.name, this.phone
         );
     }
+
 }

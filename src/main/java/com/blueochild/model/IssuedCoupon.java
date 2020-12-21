@@ -39,7 +39,7 @@ public class IssuedCoupon {
     @Override
     public String toString() {
         return String.format(
-                "IssuedCoupon[issueCouponId=%d, couponId=%d, userId=%d, expiredAt='%s', userId='%s']",
+                "IssuedCoupon[issueCouponId=%d, couponId=%d, userId=%d, expiredAt='%s', used='%s']",
                 this.issuedCouponId, this.couponId, this.userId, this.expiredAt, this.used
         );
     }

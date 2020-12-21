@@ -8,7 +8,7 @@ public class UserTotalPaidPrice {
     int totalPaidPrice;
 
     public UserTotalPaidPrice(SaleGroupByUserId saleGroupByUserId) {
-        this.userId = saleGroupByUserId.getUserId();
+        this.userId = saleGroupByUserId.getUserID();
         this.totalPaidPrice = saleGroupByUserId.getTotalPaidPrice();
     }
 

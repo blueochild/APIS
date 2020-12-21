@@ -1,14 +1,10 @@
 package com.blueochild.route;
 
 import com.blueochild.model.Sale;
-import com.blueochild.model.User;
 import com.blueochild.service.SaleService;
-import com.blueochild.service.UserService;
 import com.blueochild.vo.SalePurchaseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/sale")
@@ -20,15 +16,9 @@ public class SaleRoute {
         this.saleService = saleService;
     }
 
-    @GetMapping("")
-    @ResponseBody
-    public List<User> getSales() {
-        return this.saleService.findAll();
-    }
-
     @GetMapping("/{sale_id}")
     @ResponseBody
-    public Sale getSale(@PathVariable(value="sale_id") String saleId) throws Exception {
+    public Sale getSale(@PathVariable(value="sale_id") String saleId) throws Exception{
         return this.saleService.find(Integer.parseInt(saleId));
     }
 
@@ -44,7 +34,7 @@ public class SaleRoute {
     }
 
     @PostMapping("/{sale_id}/refund")
-    public void refund(@PathVariable(value = "sale_id") String saleId) throws Exception {
+    public void refund(@PathVariable(value="sale_id") String saleId) throws Exception{
         this.saleService.refund(Integer.parseInt(saleId));
     }
 }

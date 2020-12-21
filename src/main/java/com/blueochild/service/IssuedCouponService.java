@@ -2,9 +2,9 @@ package com.blueochild.service;
 
 import com.blueochild.model.Coupon;
 import com.blueochild.model.IssuedCoupon;
+import com.blueochild.util.DateUtil;
 import com.blueochild.repository.CouponRepository;
 import com.blueochild.repository.IssuedCouponRepository;
-import com.blueochild.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -17,14 +17,14 @@ public class IssuedCouponService {
     private final CouponRepository couponRepository;
 
     @Autowired
-    public IssuedCouponService(IssuedCouponRepository issuedCouponRepository,
-                               CouponRepository couponRepository) {
+    public IssuedCouponService(IssuedCouponRepository issuedCouponRepository, CouponRepository couponRepository) {
         this.issuedCouponRepository = issuedCouponRepository;
         this.couponRepository = couponRepository;
     }
 
     public IssuedCoupon issueCouponById(int issueCouponId) throws Exception {
-        return this.issuedCouponRepository.findById(issueCouponId).orElseThrow(() -> new Exception("해당 발급된 쿠폰 ID가 없습니다."));
+        return this.issuedCouponRepository.findById(issueCouponId)
+                .orElseThrow(() -> new Exception("해당 발급된 쿠폰 ID가 없습니다"));
     }
 
     public int issueCoupon(int couponId, int userId) throws Exception {
@@ -35,11 +35,13 @@ public class IssuedCouponService {
         Date addedDate = DateUtil.addDays(new Date(), coupon.getAvailableDays());
 
         int compareDate = addedDate.compareTo(coupon.getExpireAt());
-        if (compareDate >= 1) {
+        if (compareDate == 1) {
             expireDate = coupon.getExpireAt();
-        } else if (compareDate <= -1) {
+        }
+        else if (compareDate == -1){
             expireDate = addedDate;
-        } else {
+        }
+        else {
             expireDate = addedDate;
         }
 
@@ -54,4 +56,5 @@ public class IssuedCouponService {
 
         return issuedCoupon.getIssuedCouponId();
     }
+
 }

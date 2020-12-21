@@ -10,29 +10,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/initialize")
+@RequestMapping
 public class InitializeRoute {
-    private final UserService userService;
     private final ProductService productService;
-    private final SaleService saleService;
     private final ReviewService reviewService;
+    private final SaleService saleService;
+    private final UserService userService;
 
     @Autowired
-    public InitializeRoute(UserService userService,
-                           ProductService productService,
+    public InitializeRoute(ProductService productService,
+                           ReviewService reviewService,
                            SaleService saleService,
-                           ReviewService reviewService) {
-        this.userService = userService;
+                           UserService userService) {
         this.productService = productService;
-        this.saleService = saleService;
         this.reviewService = reviewService;
+        this.saleService = saleService;
+        this.userService = userService;
     }
 
-    @GetMapping("")
+    @GetMapping("/initialize")
     public void initialize() {
-        this.userService.initializeUsers();
         this.productService.initializeProducts();
-        this.saleService.initializeSales();
+        this.userService.initializeUsers();
         this.reviewService.initializeReviews();
+        this.saleService.initializeSales();
     }
 }

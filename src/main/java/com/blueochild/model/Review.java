@@ -33,7 +33,7 @@ public class Review {
     @Override
     public String toString() {
         return String.format(
-                "Review[reviewId=%d, userId=%d, review='%s']",
+                "Review[reviewId=%d, userId=%d, rate=%d, review='%s']",
                 this.reviewId, this.userId, this.rate, this.review
         );
     }

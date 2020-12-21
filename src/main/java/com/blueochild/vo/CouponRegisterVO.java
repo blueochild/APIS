@@ -32,8 +32,8 @@ public class CouponRegisterVO {
         return String.format(
                 "CouponRegisterVO[expireAt='%s', availableDays=%d, productID=%d, category='%s', " +
                         "discountPrice=%d, discountPercentage=%d]",
-                this.expireAt, this.availableDays, this.productID, this.category,
-                this.discountPrice, this.discountPercentage
+                this.expireAt, this.availableDays, this.productID, this.category, this.discountPrice,
+                this.discountPercentage
         );
     }
 }

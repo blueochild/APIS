@@ -14,7 +14,7 @@ public interface SaleRepository extends JpaRepository<Sale, Integer> {
 
     @Query(value =
             "SELECT USER_ID as userId, SUM(PAID_PRICE) as totalPaidPrice " +
-            "FROM SALE WHERE user_Id = ?1 GROUP BY user_Id",
+            "FROM SALE WHERE user_id = ?1 GROUP BY USER_ID",
             nativeQuery = true)
     public SaleGroupByUserId PurchaseAmountGroupByUserId(int userId);
 }
