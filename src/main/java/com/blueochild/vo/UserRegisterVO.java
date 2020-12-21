@@ -15,8 +15,8 @@ public class UserRegisterVO {
     @Override
     public String toString() {
         return String.format(
-                "userRegisterVO[email='%s', name='%s', phone='%s']",
+                "UserRegisterVO[email='%s', name='%s', phone='%s']",
                 this.email, this.name, this.phone
         );
-    };
-};
+    }
+}

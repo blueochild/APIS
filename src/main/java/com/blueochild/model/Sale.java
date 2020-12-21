@@ -1,6 +1,6 @@
 package com.blueochild.model;
 
-import com.blueochild.datamodel.SaleStatus;
+import com.blueochild.datamodel.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,10 +33,10 @@ public class Sale {
 
     @Setter
     @Enumerated(EnumType.STRING)
-    private SaleStatus status = SaleStatus.NON_PAID;
+    private SaleStatusEnum status = SaleStatusEnum.NON_PAID;
 
     @Builder
-    public Sale(int userId, int productId, int paidPrice, int listPrice, int amount, String status) {
+    public Sale(int userId, int productId, int paidPrice, int listPrice, int amount) {
         this.userId = userId;
         this.productId = productId;
         this.paidPrice = paidPrice;
@@ -47,8 +47,8 @@ public class Sale {
     @Override
     public String toString() {
         return String.format(
-                "Sale[saleId=%d, userId=%d, productId=%d, paidPrice=%d, listPrice=%d, amount=%d, status=%d]",
-                this.saleId, this.userId, this.productId, this.paidPrice, this.listPrice, this.amount, this.status
+                "Sale[saleId=%d, userId=%d, productId=%d, paidPrice=%d, listPrice=%d, amount=%d]",
+                this.saleId, this.userId, this.productId, this.paidPrice, this.listPrice, this.amount
         );
     }
 }

@@ -1,9 +1,10 @@
 package com.blueochild.repository;
 
-import com.blueochild.model.User;
+import com.blueochild.model.Coupon;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface CouponRepository extends JpaRepository<Coupon, Integer> {
+
 }

@@ -9,7 +9,7 @@ public class UserTotalPaidPrice {
 
     public UserTotalPaidPrice(SaleGroupByUserId saleGroupByUserId) {
         this.userId = saleGroupByUserId.getUserId();
-        this.totalPaidPrice = saleGroupByUserId.getTotalPurchaseAmount();
+        this.totalPaidPrice = saleGroupByUserId.getTotalPaidPrice();
     }
 
     @Override

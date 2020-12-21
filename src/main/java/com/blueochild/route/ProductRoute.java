@@ -1,8 +1,10 @@
 package com.blueochild.route;
 
 import com.blueochild.model.Product;
+import com.blueochild.model.User;
 import com.blueochild.service.ProductService;
-import com.blueochild.vo.ProductInsertVO;
+import com.blueochild.vo.ProductRegisterVO;
+import com.blueochild.vo.UserRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,38 +18,36 @@ public class ProductRoute {
     @Autowired
     public ProductRoute(ProductService productService) {
         this.productService = productService;
-    };
+    }
 
     @GetMapping("")
     @ResponseBody
-    public List<Product> getProducts() {
-        return this.productService.findAll();
-    };
+    public List<User> getProducts() { return this.productService.findAll(); }
 
-    @GetMapping("/{productId}")
+    @GetMapping("/{product_id}")
     @ResponseBody
-    public Product getProduct(@PathVariable(value = "productId") String productId) throws Exception{
+    public Product getProduct(@PathVariable(value="product_id") String productId) throws Exception {
         return this.productService.find(Integer.parseInt(productId));
-    };
-
-    @GetMapping("/initialize")
-    public void initializers() {
-        this.productService.initializeProducts();
-    };
+    }
 
     @PostMapping("")
-    public int ProductInsertVO(ProductInsertVO productInsertVO) {
-        return this.productService.ProductInsertVO(productInsertVO);
-    };
+    public int createProduct(ProductRegisterVO product) {
+        return this.productService.createProduct(product);
+    }
 
-    @DeleteMapping("/{productId}")
-    public void deleteProduct(@PathVariable(value = "productId") String productId) {
+    @GetMapping("/initialize")
+    public void initializeProducts() {
+        this.productService.initializeProducts();
+    }
+
+    @DeleteMapping("/{product_id}")
+    public void deleteProduct(@PathVariable(value = "product_id") String productId) {
         this.productService.deleteProduct(Integer.parseInt(productId));
-    };
-    
-    @GetMapping("/category/{categoryName}")
+    }
+
+    @GetMapping("/category/{category_name}")
     @ResponseBody
-    public List<Product> getProductsByCategory(@PathVariable(value = "categoryName") String categoryName) {
-        return this.productService.productsByCategory(categoryName);
-    };
-};
+    public List<Product> getProductsByCategory(@PathVariable(value = "category_name") String category_name) {
+        return this.productService.productsByCategory(category_name);
+    }
+}
