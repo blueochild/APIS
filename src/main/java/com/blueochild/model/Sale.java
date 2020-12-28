@@ -1,6 +1,6 @@
 package com.blueochild.model;
 
-import com.choijh.datamodel.SaleStatusEnum;
+import com.blueochild.datamodel.SaleStatusEnum;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

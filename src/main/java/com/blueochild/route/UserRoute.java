@@ -1,13 +1,12 @@
 package com.blueochild.route;
 
-import com.blueochild.datamodel.SaleGroupByUserId;
 import com.blueochild.datamodel.UserGradeEnum;
 import com.blueochild.datamodel.UserTotalPaidPrice;
 import com.blueochild.model.Sale;
 import com.blueochild.model.User;
 import com.blueochild.service.SaleService;
 import com.blueochild.service.UserService;
-import com.blueochild.vo.UserRegisterVO;
+import com.blueochild.datamodel.vo.UserRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

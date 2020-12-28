@@ -1,8 +1,9 @@
 package com.blueochild.service;
 
+import com.blueochild.datamodel.exception.ControllableException;
 import com.blueochild.model.Coupon;
 import com.blueochild.repository.CouponRepository;
-import com.blueochild.vo.CouponRegisterVO;
+import com.blueochild.datamodel.vo.CouponRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -19,7 +20,7 @@ public class CouponService {
 
     public int createCoupon(CouponRegisterVO couponRegisterVO) throws Exception {
         if (couponRegisterVO.getDiscountPercentage() != 0 && couponRegisterVO.getDiscountPrice() != 0) {
-            throw new Exception("할인 금액과 할인 비율이 동시에 존재할수 없습니다!");
+            throw new ControllableException("할인 금액과 할인 비율이 동시에 존재할수 없습니다!");
         }
 
         Coupon createdCoupon = Coupon.builder()
@@ -40,6 +41,6 @@ public class CouponService {
     public Coupon couponById(int couponId) throws Exception {
         Optional<Coupon> coupon = this.couponRepository.findById(couponId);
         
-        return coupon.orElseThrow(() -> new Exception("해당 쿠폰을 확인할수 없습니다"));
+        return coupon.orElseThrow(() -> new ControllableException("해당 쿠폰을 확인할수 없습니다"));
     }
 }

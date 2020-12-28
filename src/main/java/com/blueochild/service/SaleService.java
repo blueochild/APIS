@@ -3,9 +3,10 @@ package com.blueochild.service;
 import com.blueochild.datamodel.SaleGroupByUserId;
 import com.blueochild.datamodel.SaleStatusEnum;
 import com.blueochild.datamodel.UserTotalPaidPrice;
+import com.blueochild.datamodel.exception.ControllableException;
 import com.blueochild.model.*;
 import com.blueochild.repository.*;
-import com.blueochild.vo.SalePurchaseVO;
+import com.blueochild.datamodel.vo.SalePurchaseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -35,7 +36,7 @@ public class SaleService {
 
     public Sale find(int saleId) throws Exception {
         Optional<Sale> searchedSale = this.saleRepository.findById(saleId);
-        return searchedSale.orElseThrow(() -> new Exception("해당 상품을 찾지 못하였습니다"));
+        return searchedSale.orElseThrow(() -> new ControllableException("해당 상품을 찾지 못하였습니다"));
     }
 
     private int getDiscountAmount(int originAmount, int discountAmount, int discountPercentage) {
@@ -52,22 +53,22 @@ public class SaleService {
         Optional<Product> product = this.productRepository.findById(salePurchaseVO.getProductId());
         Optional<User> user = this.userRepository.findById(salePurchaseVO.getUserId());
 
-        Product findedProduct = product.orElseThrow(() -> new Exception("해당 상품 ID 가 존재하지 않습니다"));
-        user.orElseThrow(() -> new Exception("해당 유저 ID 가 존재하지 않습니다"));
+        Product findedProduct = product.orElseThrow(() -> new ControllableException("해당 상품 ID 가 존재하지 않습니다"));
+        user.orElseThrow(() -> new ControllableException("해당 유저 ID 가 존재하지 않습니다"));
 
         if (salePurchaseVO.getListPrice() != findedProduct.getListPrice() * salePurchaseVO.getAmount()) {
-            throw new Exception("정가가 상품정보에 등록된 가격과 다릅니다");
+            throw new ControllableException("정가가 상품정보에 등록된 가격과 다릅니다");
         }
         if (salePurchaseVO.getPaidPrice() != findedProduct.getPrice() * salePurchaseVO.getAmount()) {
-            throw new Exception("실제 구매 금액이 상품정보에 등록된 가격과 다릅니다");
+            throw new ControllableException("실제 구매 금액이 상품정보에 등록된 가격과 다릅니다");
         }
 
         int issuedCouponId = salePurchaseVO.getIssuedCouponId();
         IssuedCoupon issuedCoupon = this.issuedCouponRepository.findById(issuedCouponId)
-                .orElseThrow(() -> new Exception("해당 발급된 쿠폰이 존재하지 않습니다"));
+                .orElseThrow(() -> new ControllableException("해당 발급된 쿠폰이 존재하지 않습니다"));
 
         Coupon coupon = this.couponRepository.findById(issuedCoupon.getCouponId())
-                .orElseThrow(() -> new Exception("해당 쿠폰이 존재하지 않습니다"));
+                .orElseThrow(() -> new ControllableException("해당 쿠폰이 존재하지 않습니다"));
 
         int discountAmount = this.getDiscountAmount(salePurchaseVO.getPaidPrice(),
                                                     coupon.getDiscountPrice(),
@@ -93,7 +94,7 @@ public class SaleService {
 
     public void purchase(int saleId) throws Exception {
         Optional<Sale> targetSale = this.saleRepository.findById(saleId);
-        Sale sale = targetSale.orElseThrow(() -> new Exception("결제 완료로 변경하는 도중에 문제가 생겼습니다"));
+        Sale sale = targetSale.orElseThrow(() -> new ControllableException("결제 완료로 변경하는 도중에 문제가 생겼습니다"));
 
         sale.setStatus(SaleStatusEnum.PAID);
         this.saleRepository.save(sale);
@@ -102,7 +103,7 @@ public class SaleService {
 
     public void refund(int saleId) throws Exception{
         Optional<Sale> targetSale = this.saleRepository.findById(saleId);
-        Sale sale = targetSale.orElseThrow(() -> new Exception("결제 취소로 변경하는 도중에 문제가 생겼습니다"));
+        Sale sale = targetSale.orElseThrow(() -> new ControllableException("결제 취소로 변경하는 도중에 문제가 생겼습니다"));
 
         sale.setStatus(SaleStatusEnum.REFUNDED);
         this.saleRepository.save(sale);

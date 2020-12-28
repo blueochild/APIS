@@ -6,10 +6,11 @@ import java.util.Optional;
 import com.blueochild.datamodel.SaleGroupByUserId;
 import com.blueochild.datamodel.UserGradeEnum;
 import com.blueochild.datamodel.UserTotalPaidPrice;
+import com.blueochild.datamodel.exception.ControllableException;
 import com.blueochild.model.User;
 import com.blueochild.repository.SaleRepository;
 import com.blueochild.repository.UserRepository;
-import com.blueochild.vo.UserRegisterVO;
+import com.blueochild.datamodel.vo.UserRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -27,7 +28,7 @@ public class UserService {
 
     public User find(int userId) throws Exception{
         Optional<User> searchedUser = this.userRepository.findById(userId);
-        return searchedUser.orElseThrow(() -> new Exception("해당 유저를 찾지 못하였습니다"));
+        return searchedUser.orElseThrow(() -> new ControllableException("해당 유저를 찾지 못하였습니다"));
     }
 
     public List<User> findAll() {
@@ -83,7 +84,7 @@ public class UserService {
         return this.getUserGradeByTotalPaidPrice(userTotalPaidPrice.getTotalPaidPrice());
     }
 
-    private UserGradeEnum getUserGradeByTotalPaidPrice(int totalPaidPrice) {
+    public UserGradeEnum getUserGradeByTotalPaidPrice(int totalPaidPrice) {
         if (totalPaidPrice < 100000) {
             return UserGradeEnum.FirstGrade;
         }

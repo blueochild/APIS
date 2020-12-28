@@ -1,4 +1,4 @@
-package com.blueochild.vo;
+package com.blueochild.datamodel.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

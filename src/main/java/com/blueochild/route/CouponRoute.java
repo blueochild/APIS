@@ -4,7 +4,10 @@ import com.blueochild.model.Coupon;
 import com.blueochild.model.IssuedCoupon;
 import com.blueochild.service.CouponService;
 import com.blueochild.service.IssuedCouponService;
-import com.blueochild.vo.CouponRegisterVO;
+import com.blueochild.datamodel.vo.CouponRegisterVO;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +23,11 @@ public class CouponRoute {
         this.issuedCouponService = issuedCouponService;
     }
 
+    @ApiOperation(value = "쿠폰 정보 조회")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "coupon_id", value = "쿠폰 ID", required = true, dataType = "string",
+                    paramType = "query", defaultValue = "")
+    })
 
     @GetMapping("/{coupon_id}")
     @ResponseBody

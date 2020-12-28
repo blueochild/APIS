@@ -2,7 +2,7 @@ package com.blueochild.route;
 
 import com.blueochild.model.Sale;
 import com.blueochild.service.SaleService;
-import com.blueochild.vo.SalePurchaseVO;
+import com.blueochild.datamodel.vo.SalePurchaseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

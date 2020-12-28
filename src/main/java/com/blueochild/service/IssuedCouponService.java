@@ -1,5 +1,6 @@
 package com.blueochild.service;
 
+import com.blueochild.datamodel.exception.ControllableException;
 import com.blueochild.model.Coupon;
 import com.blueochild.model.IssuedCoupon;
 import com.blueochild.util.DateUtil;
@@ -24,12 +25,12 @@ public class IssuedCouponService {
 
     public IssuedCoupon issueCouponById(int issueCouponId) throws Exception {
         return this.issuedCouponRepository.findById(issueCouponId)
-                .orElseThrow(() -> new Exception("해당 발급된 쿠폰 ID가 없습니다"));
+                .orElseThrow(() -> new ControllableException("해당 발급된 쿠폰 ID가 없습니다"));
     }
 
     public int issueCoupon(int couponId, int userId) throws Exception {
         Optional<Coupon> SearchedCoupon = this.couponRepository.findById(couponId);
-        Coupon coupon = SearchedCoupon.orElseThrow(() -> new Exception("해당 쿠폰을 찾지 못하였습니다."));
+        Coupon coupon = SearchedCoupon.orElseThrow(() -> new ControllableException("해당 쿠폰을 찾지 못하였습니다."));
 
         Date expireDate = null;
         Date addedDate = DateUtil.addDays(new Date(), coupon.getAvailableDays());

@@ -1,8 +1,9 @@
 package com.blueochild.service;
 
+import com.blueochild.datamodel.exception.ControllableException;
 import com.blueochild.model.Product;
 import com.blueochild.repository.ProductRepository;
-import com.blueochild.vo.ProductRegisterVO;
+import com.blueochild.datamodel.vo.ProductRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -24,7 +25,7 @@ public class ProductService {
 
     public Product find(int productId) throws Exception {
         Optional<Product> searchedProduct = this.productRepository.findById(productId);
-        return searchedProduct.orElseThrow(() -> new Exception("해당 상품을 찾지 못하였습니다"));
+        return searchedProduct.orElseThrow(() -> new ControllableException("해당 상품을 찾지 못하였습니다"));
     }
 
     public void initializeProducts() {
